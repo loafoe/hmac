@@ -5,14 +5,14 @@ import (
 	"time"
 
 	"github.com/cloudfoundry-community/gautocloud"
-	_ "github.com/cloudfoundry-community/gautocloud/connectors/databases/client/postgresql"
+	_ "github.com/cloudfoundry-community/gautocloud/connectors/databases/client/postgresql" // PostgreSQL connector
 	"github.com/cloudfoundry-community/gautocloud/connectors/databases/dbtype"
 	"github.com/jmoiron/sqlx"
 	"github.com/jmoiron/sqlx/types"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // PostgreSQL driver
 )
 
-// PGPayload is an entry in the alerts table
+// PGPayload is an entry in the alerts table that wraps Payload
 type PGPayload struct {
 	ID        int64          `db:"id"`
 	CreatedAt time.Time      `db:"created_at"`
