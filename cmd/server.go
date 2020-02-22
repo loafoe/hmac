@@ -19,10 +19,47 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package main
+package cmd
 
-import "github.com/philips-labs/hmac/cmd"
+import (
+	"errors"
+	"log"
+	"os"
 
-func main() {
-	cmd.Execute()
+	"github.com/philips-labs/hmac/alerts"
+	"github.com/philips-labs/hmac/router"
+	"github.com/spf13/cobra"
+)
+
+// serverCmd represents the server command
+var serverCmd = &cobra.Command{
+	Use:   "server",
+	Short: "Start a hmac server",
+	Long:  `Starts a hmac server which exposes a webhook endpoint to capture alerts`,
+	Run: func(cmd *cobra.Command, args []string) {
+		token, _ := cmd.Flags().GetString("token")
+		port, _ := cmd.Flags().GetString("port")
+
+		if token == "" {
+			log.Fatal(errors.New("you need to provide a token"))
+		}
+		if port == "" {
+			log.Fatal(errors.New("you need to provide a port to listen on"))
+		}
+		storer, err := alerts.NewPGStorer()
+		if err != nil {
+			log.Fatal(err)
+		}
+		e := router.New(router.Config{
+			Storer: storer,
+			Token:  token,
+		})
+		e.Logger.Fatal(e.Start(":" + port))
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(serverCmd)
+	serverCmd.Flags().StringP("port", "p", "8080", "Port to listen on")
+	serverCmd.Flags().StringP("token", "t", os.Getenv("TOKEN"), "Token for /web/hook/alerts/:token")
 }

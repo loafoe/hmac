@@ -7,8 +7,12 @@ import (
 )
 
 // Handler returns an Echo handler
-func Handler(storer Storer) echo.HandlerFunc {
+func Handler(token string, storer Storer) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		t := c.Param("token")
+		if t != token {
+			return c.JSON(http.StatusUnauthorized, nil)
+		}
 		p := new(Payload)
 		if err := c.Bind(p); err != nil {
 			return err

@@ -6,8 +6,13 @@ import (
 	"github.com/philips-labs/hmac/alerts"
 )
 
+type Config struct {
+	Storer alerts.Storer
+	Token  string
+}
+
 // New returns a new router
-func New(storer alerts.Storer) *echo.Echo {
+func New(config Config) *echo.Echo {
 	// create a new echo instance
 	e := echo.New()
 
@@ -15,7 +20,7 @@ func New(storer alerts.Storer) *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.POST("/alerts", alerts.Handler(storer))
+	e.POST("/webhook/alerts/:token", alerts.Handler(config.Token, config.Storer))
 
 	return e
 }
