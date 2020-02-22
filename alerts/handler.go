@@ -7,14 +7,14 @@ import (
 )
 
 type errorResponse struct {
-	statusCode int    `json:"statusCode"`
-	message    string `json:"message"`
+	StatusCode int    `json:"statusCode"`
+	Message    string `json:"message"`
 }
 
 func jsonError(c echo.Context, statusCode int, message string) error {
 	return c.JSON(statusCode, &errorResponse{
-		statusCode: statusCode,
-		message:    message,
+		StatusCode: statusCode,
+		Message:    message,
 	})
 }
 
