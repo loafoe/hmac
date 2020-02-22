@@ -1,4 +1,4 @@
-FROM golang:1.13.7 as builder
+FROM golang:1.13.8 as builder
 WORKDIR /build
 COPY go.mod .
 COPY go.sum .
@@ -13,4 +13,4 @@ RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY --from=builder /build/hmac /app
 EXPOSE 8080
-CMD ["/app/hmac"]
+CMD ["/app/hmac","server"]
