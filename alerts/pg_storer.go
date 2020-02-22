@@ -2,8 +2,6 @@ package alerts
 
 import (
 	"encoding/json"
-	"fmt"
-	"os"
 	"time"
 
 	"github.com/cloudfoundry-community/gautocloud"
@@ -12,25 +10,26 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/jmoiron/sqlx/types"
 	_ "github.com/lib/pq" // PostgreSQL driver
-	"github.com/markbates/pkger"
 )
 
 func init() {
-	pkger.Walk("/migrations", func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
+	/*
+		pkger.Walk("/migrations", func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
 
-		fmt.Fprintf(os.Stdout,
-			"%s \t %d \t %s \t %s \t\n",
-			info.Name(),
-			info.Size(),
-			info.Mode(),
-			info.ModTime().Format(time.RFC3339),
-		)
+			fmt.Fprintf(os.Stdout,
+				"%s \t %d \t %s \t %s \t\n",
+				info.Name(),
+				info.Size(),
+				info.Mode(),
+				info.ModTime().Format(time.RFC3339),
+			)
 
-		return nil
-	})
+			return nil
+		})
+	*/
 }
 
 // PGPayload is an entry in the alerts table that wraps Payload

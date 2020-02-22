@@ -37,8 +37,8 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "hmac",
 	Short: "HSDP Metrics Alert Collector",
-	Long: `HMAC is a microservice which captures metrics alerts and stores them in a PostgreSQL database
-	for further analysis, typically by Grafana.`,
+	Long: `hmac is a microservice which captures metric alerts and stores them in a PostgreSQL database
+	for further querying`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
