@@ -24,11 +24,11 @@ package cmd
 import (
 	"errors"
 	"log"
-	"os"
 
 	"github.com/philips-labs/hmac/alerts"
 	"github.com/philips-labs/hmac/router"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // serverCmd represents the server command
@@ -40,6 +40,9 @@ var serverCmd = &cobra.Command{
 		token, _ := cmd.Flags().GetString("token")
 		port, _ := cmd.Flags().GetString("port")
 
+		if token == "" {
+			token = viper.GetString("token")
+		}
 		if token == "" {
 			log.Fatal(errors.New("you need to provide a token"))
 		}
@@ -61,5 +64,5 @@ var serverCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(serverCmd)
 	serverCmd.Flags().StringP("port", "p", "8080", "Port to listen on")
-	serverCmd.Flags().StringP("token", "t", os.Getenv("TOKEN"), "Token for /webhook/alerts/:token")
+	serverCmd.Flags().StringP("token", "t", "", "Token for /webhook/alerts/:token")
 }

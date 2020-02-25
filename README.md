@@ -30,7 +30,7 @@ applications:
   routes:
   - route: hmac.host.com
   env:
-    TOKEN: RandomTokenHere
+    HMAC_TOKEN: RandomTokenHere
   services:
   - postgresql
   stack: cflinuxfs3

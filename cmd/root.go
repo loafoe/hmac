@@ -78,6 +78,7 @@ func initConfig() {
 		viper.SetConfigName(".hmac")
 	}
 
+	viper.SetEnvPrefix("HMAC")
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.
