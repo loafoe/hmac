@@ -61,5 +61,5 @@ var serverCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(serverCmd)
 	serverCmd.Flags().StringP("port", "p", "8080", "Port to listen on")
-	serverCmd.Flags().StringP("token", "t", os.Getenv("TOKEN"), "Token for /web/hook/alerts/:token")
+	serverCmd.Flags().StringP("token", "t", os.Getenv("TOKEN"), "Token for /webhook/alerts/:token")
 }
