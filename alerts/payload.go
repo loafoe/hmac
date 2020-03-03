@@ -16,15 +16,15 @@ type Alert struct {
 
 // Payload describes the webhook payload as send by the notification service
 type Payload struct {
-	Receiver          string            `json:"receiver"`
+	Receiver          string            `json:"receiver,omitempty"`
 	Status            string            `json:"status"`
 	Alerts            []Alert           `json:"alerts"`
-	GroupLabels       map[string]string `json:"groupLabels"`
-	CommonLabels      map[string]string `json:"commonLabels"`
-	CommonAnnotations map[string]string `json:"commonAnnotations"`
-	ExternalURL       string            `json:"externalURL"`
-	Version           string            `json:"version"`
-	GroupKey          string            `json:"groupKey"`
+	GroupLabels       map[string]string `json:"groupLabels,omitempty"`
+	CommonLabels      map[string]string `json:"commonLabels,omitempty"`
+	CommonAnnotations map[string]string `json:"commonAnnotations,omitempty"`
+	ExternalURL       string            `json:"externalURL,omitempty"`
+	Version           string            `json:"version,omitempty"`
+	GroupKey          string            `json:"groupKey,omitempty"`
 }
 
 /*
