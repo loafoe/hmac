@@ -20,7 +20,9 @@ func New(config Config) *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.POST("/webhook/alerts/:token", alerts.Handler(config.Token, config.Storer))
+	e.POST("/webhook/alerts/:token", alerts.StoreHandler(config.Token, config.Storer))
+	e.PUT("/webhook/alerts/:token", alerts.AddHandler(config.Token, config.Storer))
+	e.DELETE("/webhook/alerts/:token", alerts.DeleteHandler(config.Token, config.Storer))
 
 	return e
 }

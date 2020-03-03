@@ -45,6 +45,16 @@ type PGStorer struct {
 	db  *sqlx.DB
 }
 
+// Remove removes all instances of alertName
+func (p *PGStorer) Remove(payload Payload) error {
+	db := p.db
+
+	tx := db.MustBegin()
+
+	tx.MustExec("DELETE FROM alerts WHERE (payload->>'alertName' = $1 OR payload->'alerts'->0->'labels'->>'alertname' = $1)", payload.AlertName)
+	return tx.Commit()
+}
+
 // Store stores a payload in the psql DB
 func (p *PGStorer) Store(payload Payload) error {
 	db := p.db
@@ -57,9 +67,7 @@ func (p *PGStorer) Store(payload Payload) error {
 	tx := db.MustBegin()
 
 	tx.MustExec("INSERT INTO alerts (payload) VALUES ($1)", payloadJSON)
-	tx.Commit()
-
-	return nil
+	return tx.Commit()
 }
 
 // NewPGStorer retruns a psql storer
@@ -79,5 +87,4 @@ func NewPGStorer() (*PGStorer, error) {
 	}
 
 	return storer, nil
-
 }

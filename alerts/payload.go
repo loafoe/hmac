@@ -8,23 +8,24 @@ import (
 type Alert struct {
 	Status       string            `json:"status"`
 	Labels       map[string]string `json:"labels"`
-	Annotations  map[string]string `json:"annotations"`
-	StartsAt     time.Time         `json:"startsAt"`
-	EndsAt       time.Time         `json:"endsAt"`
-	GeneratorURL string            `json:"generatorURL"`
+	Annotations  map[string]string `json:"annotations,omitempty"`
+	StartsAt     time.Time         `json:"startsAt,omitempty"`
+	EndsAt       time.Time         `json:"endsAt,omitempty"`
+	GeneratorURL string            `json:"generatorURL,omitempty"`
 }
 
 // Payload describes the webhook payload as send by the notification service
 type Payload struct {
 	Receiver          string            `json:"receiver,omitempty"`
-	Status            string            `json:"status"`
-	Alerts            []Alert           `json:"alerts"`
+	Status            string            `json:"status,omitempty"`
+	Alerts            []Alert           `json:"alerts,omitempty"`
 	GroupLabels       map[string]string `json:"groupLabels,omitempty"`
 	CommonLabels      map[string]string `json:"commonLabels,omitempty"`
 	CommonAnnotations map[string]string `json:"commonAnnotations,omitempty"`
 	ExternalURL       string            `json:"externalURL,omitempty"`
 	Version           string            `json:"version,omitempty"`
 	GroupKey          string            `json:"groupKey,omitempty"`
+	AlertName         string            `json:"alertName,omitempty"`
 }
 
 /*
