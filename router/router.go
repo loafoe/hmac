@@ -12,7 +12,13 @@ type Config struct {
 }
 
 // New returns a new router
-func New(config Config) *echo.Echo {
+func New(config Config) (*echo.Echo, error) {
+	// Init storer
+	err := config.Storer.Init()
+	if err != nil {
+		return nil, err
+	}
+
 	// create a new echo instance
 	e := echo.New()
 
@@ -24,5 +30,5 @@ func New(config Config) *echo.Echo {
 	e.PUT("/webhook/alerts/:token", alerts.AddHandler(config.Token, config.Storer))
 	e.DELETE("/webhook/alerts/:token", alerts.DeleteHandler(config.Token, config.Storer))
 
-	return e
+	return e, nil
 }

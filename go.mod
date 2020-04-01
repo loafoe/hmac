@@ -1,13 +1,13 @@
 module github.com/philips-labs/hmac
 
-go 1.13
+go 1.14
 
 require (
 	github.com/cloudfoundry-community/gautocloud v1.1.4
+	github.com/golang-migrate/migrate/v4 v4.10.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/labstack/echo/v4 v4.1.14
 	github.com/lib/pq v1.3.0
-	github.com/likexian/gokit v0.22.1
 	github.com/markbates/pkger v0.14.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/pelletier/go-toml v1.6.0 // indirect

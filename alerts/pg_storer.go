@@ -2,35 +2,20 @@ package alerts
 
 import (
 	"encoding/json"
+	"log"
 	"time"
 
 	"github.com/cloudfoundry-community/gautocloud"
 	_ "github.com/cloudfoundry-community/gautocloud/connectors/databases/client/postgresql" // PostgreSQL connector
 	"github.com/cloudfoundry-community/gautocloud/connectors/databases/dbtype"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/postgres"
+	bindata "github.com/golang-migrate/migrate/v4/source/go_bindata"
 	"github.com/jmoiron/sqlx"
 	"github.com/jmoiron/sqlx/types"
 	_ "github.com/lib/pq" // PostgreSQL driver
+	"github.com/philips-labs/hmac/migrations"
 )
-
-func init() {
-	/*
-		pkger.Walk("/migrations", func(path string, info os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
-
-			fmt.Fprintf(os.Stdout,
-				"%s \t %d \t %s \t %s \t\n",
-				info.Name(),
-				info.Size(),
-				info.Mode(),
-				info.ModTime().Format(time.RFC3339),
-			)
-
-			return nil
-		})
-	*/
-}
 
 // PGPayload is an entry in the alerts table that wraps Payload
 type PGPayload struct {
@@ -43,6 +28,26 @@ type PGPayload struct {
 type PGStorer struct {
 	svc *dbtype.PostgresqlDB
 	db  *sqlx.DB
+}
+
+// Init initializes the database
+func (p *PGStorer) Init() error {
+	// wrap assets into Resource
+	assetSource := bindata.Resource(migrations.AssetNames(),
+		func(name string) ([]byte, error) {
+			return migrations.Asset(name)
+		})
+	driver, err := postgres.WithInstance(p.db.DB, &postgres.Config{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	d, err := bindata.WithInstance(assetSource)
+	if err != nil {
+		return err
+	}
+	m, err := migrate.NewWithInstance("go-bindata", d, "postgres://database", driver)
+	return m.Up()
 }
 
 // Remove removes all instances of alertName

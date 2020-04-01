@@ -38,14 +38,16 @@ func AddHandler(token string, storer Storer) echo.HandlerFunc {
 				Alert{
 					Status: "resolved",
 					Labels: map[string]string{
-						"alertname":    p.AlertName,
-						"status":       "resolved",
-						"region":       "unknown",
-						"organization": "unknown",
-						"space":        "unknown",
+						"alertname":          p.AlertName,
+						"status":             "resolved",
+						"region":             "unknown",
+						"organization":       "unknown",
+						"space":              "unknown",
+						"hsdp_instance_name": "unknown",
 					},
 					Annotations: map[string]string{
-						"description": "Initialization record",
+						"description":        "Initialization record",
+						"hsdp_instance_name": "unknown",
 					},
 				},
 			}
