@@ -47,7 +47,10 @@ func (p *PGStorer) Init() error {
 		return err
 	}
 	m, err := migrate.NewWithInstance("go-bindata", d, "postgres://database", driver)
-	return m.Up()
+	if err := m.Up(); err != migrate.ErrNoChange {
+		return err
+	}
+	return nil
 }
 
 // Remove removes all instances of alertName
