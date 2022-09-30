@@ -3,22 +3,22 @@ module github.com/philips-labs/hmac
 go 1.14
 
 require (
-	github.com/cloudfoundry-community/gautocloud v1.1.4
-	github.com/golang-migrate/migrate/v4 v4.10.0
-	github.com/jmoiron/sqlx v1.2.0
-	github.com/labstack/echo/v4 v4.1.14
-	github.com/lib/pq v1.3.0
-	github.com/markbates/pkger v0.14.0
+	github.com/cloudfoundry-community/gautocloud v1.1.11
+	github.com/gobuffalo/here v0.6.7 // indirect
+	github.com/golang-migrate/migrate/v4 v4.15.2
+	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/jmoiron/sqlx v1.3.5
+	github.com/labstack/echo/v4 v4.9.0
+	github.com/lib/pq v1.10.7
+	github.com/markbates/pkger v0.17.1
+	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/pelletier/go-toml v1.6.0 // indirect
-	github.com/spf13/afero v1.2.2 // indirect
-	github.com/spf13/cast v1.3.1 // indirect
-	github.com/spf13/cobra v0.0.6
-	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.6.2
-	github.com/stretchr/testify v1.5.1
-	golang.org/x/sys v0.0.0-20200219091948-cb0a6d8edb6c // indirect
-	gopkg.in/ini.v1 v1.52.0 // indirect
-	gopkg.in/yaml.v2 v2.2.8 // indirect
+	github.com/spf13/cobra v1.5.0
+	github.com/spf13/viper v1.13.0
+	github.com/stretchr/testify v1.8.0
+	go.uber.org/atomic v1.10.0 // indirect
+	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
+	golang.org/x/net v0.0.0-20220927171203-f486391704dc // indirect
+	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
+	golang.org/x/time v0.0.0-20220922220347-f3bd1da661af // indirect
 )
