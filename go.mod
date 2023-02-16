@@ -19,7 +19,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.0 // indirect
 	github.com/azer/snakecase v1.0.0 // indirect
 	github.com/cloudfoundry-community/go-cfenv v1.18.0 // indirect
-	github.com/containerd/containerd v1.6.8 // indirect
+	github.com/containerd/containerd v1.6.18 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gobuffalo/here v0.6.7 // indirect
