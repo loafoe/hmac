@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/cloudfoundry-community/gautocloud v1.4.1
 	github.com/golang-migrate/migrate/v4 v4.15.2
-	github.com/jmoiron/sqlx v1.3.5
+	github.com/jmoiron/sqlx v1.4.0
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/lib/pq v1.10.9
 	github.com/markbates/pkger v0.17.1
